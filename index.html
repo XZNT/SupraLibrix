@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <title>YRUZ Librix</title>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<meta name="title" content="YRUZ Librix">
+		<meta name="description" content="YRUZ Librix">
+		<meta name="keywords" content="librix,supra,yruz">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="YRUZ Librix">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css'>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.9/css/all.css'>
+<link rel='stylesheet' href='https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+  <div class="app__phone">
+    <div class="phone-header">
+	<a href="https://yruz.ix.tc/supralibrix/xzntdemo">
+      <img src="https://yruz.ix.tc/supralibrix/xzntdemo/pics/d1.png" /></a>
+      <p class="cancel-cta" v-if="step === 2 || step === 3" @click="goToHome">Cancel</p>
+      <p class="next-cta" v-if="step === 2" @click="step++">Next</p>
+      <p class="next-cta" v-if="step === 3" @click="sharePost">Share</p>
+    </div>
+    <transition name="fade">
+      <div class="feed" v-if="step === 1" v-dragscroll.y="true">
+        <instagram-post v-for="post in posts"
+                        :post="post"
+                        :key="posts.indexOf(post)">
+        </instagram-post>
+		<!-- Need to make separate voting system for all posts-->
+		<!-- Just a placeholder made by Dlabz-->
+		<div class="dropdown">
+		<br><br><br><br>
+  <div id="myDropdown" class="dropdown-content">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACD0lEQVRYCb1WvU7DMBB2KoYKiQWGSogRoT5GBc/A3sdi6yvB1IWKgdIBqXNVBIScq8/6fHF8ddoSCezcfX92TIKre1zOuVr/TCaTHkp1XQmrETOvqqpMDAP2lHVnTErNtfH65jYFC7Wr5aufg2cF6dwBCIiaZRrcafLytXX3n+++kguRDHCoOeVw2BGppYK0AsC8z6rZmOe5EAMGnsJc9HOLiQJwmGPPEQKLhH4IgAaAABxzhDa8RDsEkBsAZP5flw/AiXLGd6u3XNv3rj8WWQwWCc9oB3JMOcnr35/oz0rjBbNtXqx86jVG34cASKYBp7hnrwG2wjICCWMKjx7GFEbX5AvjP0YlpIfmFfvcvGr5KuELD4/J/BixCUhcw5x7JWHCGYBQ18gGXRjUS7DmDoyWC/e9e0pe31odzGW0sOPxOH4RYQU8lpgLj00RhvV4Pp/P3SD1iQSIBVgY/a6RsayRwoczkAOyYEokVctx2CsE0CIM0r3S+5yWD5B7DLmVlAYRPMLAM9oBNPsIpzj7hI/+JcNreR9iytCqYYFYveCjHdhsNl4DQEuwpA9NNhd+FGA4HAZNEELhgAm0ptNpSyUKIF1OCGKLVVCAhpjPZrMWMzoDuosz8XQ5co/nF7qdvYexgHhRmpQNIGCEANE6oGwsnJy59M0AApJLB9lVu39bxmCaX0MAtaAOpPvgWeMf7rND4kqeq7IAAAAASUVORK5CYII=" />
+                <input type="range" min="-50" max="50" value="0" class="supra-rainbow circle" />
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAB2ElEQVRYCb1X203DMBR1IoZgjKCoQ7ADbBDBGuUTVoAdGCKVsgZbQE6kY50414/UDf655t7zit3Stvmdl9u5mqYxGVdIuTtTyWjGTBWqmNIw2QAqero/uZeHV/Xc7D+mdzf+jI68XJBmBphXQAE4fD5+bYxKGs/fTx4WsXGtR8jmFuaQ0+CqKVZucwIEKlkJ1+55GuFJrE7gKHOE5gPRgw+yCsDmf1YfgMmY9IgQ1KYXPHwA/EEA9ket0GMJoIlSxnwh1WLAp+fqBEqEUyE4Y03pceYDhEdDwBFVvdphGIo8SGK1SJyxWhjt4Rrwsbb8Ky4lqUDNntfkr6BGrIYbDYCETFljkNOJBqgx3cNtp2lK4mtOoYTbdl1nBrjlizKmhU9GfwWptKmZmX5upjg68wEsIU2uJAurPcWqhmK4XwLwS8LbeGbfrCpsAuZmCQZcevpvRPxwsBLHRInNzTUssZsAAKVCYE4y9qnFYCGGfJpj7k+A4FwI4ChEDmvMWDmXy8X1fU9KPAAQKUGvULDRwPr0oG7eBQpQYoGPCVEN1SZ4cwUcoPI6sN97GjljaGIlAyyA4IdoLogag289Nfpc2QAeGARhP1ZzxuRlf5wSGArq9QATzsnL1T8qFdD/csClEAAAAABJRU5ErkJggg==" />
+
+  </div>
+</div>
+<!-- Dropdown whenclicked-->
+<script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+      </div>
+    </transition>
+    <div v-if="step === 2">
+      <div class="selected-image"
+           :class="filterType"
+           :style="{ backgroundImage: 'url(' + image + ')' }"></div>
+      <div class="filter-container" v-dragscroll.x="true">
+        <filter-type v-for="filter in filters"
+                     :filter="filter"
+                     :image="image"
+                     :key="filter.name">
+        </filter-type>
+      </div>
+    </div>
+    <div v-if="step === 3">
+      <div class="selected-image"
+           :class="filterType"
+           :style="{ backgroundImage: 'url(' + image + ')' }"></div>
+      <div class="caption-container">
+        <textarea class="caption-input"
+                  placeholder="Write a caption..."
+                  type="text"
+                  v-model="caption">
+        </textarea>
+      </div>
+    </div>
+    <div class="phone-footer">
+      <div class="home-cta" @click="goToHome">
+        <i class="fas fa-home fa-lg"></i>
+      </div>
+      <div class="upload-cta">
+        <input type="file"
+               name="file"
+               id="file"
+               class="inputfile"
+               @change="fileUpload"
+               v-model="fileInput"
+               :disabled="step !== 1"/>
+        <label for="file">
+          <i class="far fa-plus-square fa-lg"></i>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
+<script src='https://unpkg.com/vue-dragscroll@1.3.1/dist/vue-dragscroll.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
