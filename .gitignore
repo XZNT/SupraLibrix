@@ -1,0 +1,50 @@
+# Database
+database/colorgrade.db
+database/*.db
+*.db
+
+# Logs
+*.log
+error_log
+debug.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+cache/
+*.tmp
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Vendor (if using Composer)
+vendor/
+composer.lock
+
+# Node modules (if using npm/yarn)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/
+
+# Session files
+sessions/
+*.sess
